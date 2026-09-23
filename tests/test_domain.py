@@ -29,3 +29,18 @@ def test_ensure_email_available_rejects_duplicate():
 def test_next_user_id():
     assert next_user_id([]) == 1
     assert next_user_id([{"id": 1}, {"id": 2}]) == 3
+
+def test_ensure_email_available_accepts_unique_email():
+    users = [{"id": 1, "name": "Alice", "email": "alice@example.com"}]
+
+    ensure_email_available(users, "bob@example.com")
+
+
+def test_next_user_id_with_three_users():
+    users = [
+        {"id": 1, "name": "Alice", "email": "alice@example.com"},
+        {"id": 2, "name": "Bob", "email": "bob@example.com"},
+        {"id": 3, "name": "Charlie", "email": "charlie@example.com"},
+    ]
+
+    assert next_user_id(users) == 4
